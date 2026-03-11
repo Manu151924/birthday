@@ -1,0 +1,32 @@
+.memories-container {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.memories-container h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #ff66cc;
+}
+
+/* Gallery */
+
+.gallery {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 20px;
+}
+
+.gallery img {
+  width: 220px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 6px 25px rgba(255, 0, 102, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.1);
+}

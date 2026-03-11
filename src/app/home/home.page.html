@@ -1,0 +1,49 @@
+<ion-content class="bg">
+
+<app-galaxy></app-galaxy>
+
+<h1>{{message()}}</h1>
+
+<p>{{countdown()}}</p>
+
+<button (click)="openSurprise()">Open Surprise 🎁</button>
+
+@if(showSurprise()){
+
+<audio controls autoplay>
+ <source src="assets/audio/voice.mp3">
+</audio>
+
+<app-heart3d></app-heart3d>
+
+<app-heart-explosion></app-heart-explosion>
+
+<app-memory-sphere></app-memory-sphere>
+
+<app-love-map></app-love-map>
+
+<button (click)="generateLetter()">
+Generate Love Letter
+</button>
+
+<p>{{loveLetter()}}</p>
+
+}
+
+@defer (on interaction) {
+
+  <app-memories></app-memories>
+
+} @placeholder {
+
+  <p>Loading memories...</p>
+
+}
+<div class="hearts">
+<span>💗</span>
+<span>💗</span>
+<span>💗</span>
+<span>💗</span>
+</div>
+
+</ion-content>
