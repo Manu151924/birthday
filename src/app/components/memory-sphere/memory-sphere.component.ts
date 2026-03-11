@@ -29,7 +29,7 @@ const renderer=new THREE.WebGLRenderer({canvas});
 renderer.setSize(window.innerWidth,400);
 
 const texture=new THREE.TextureLoader()
-.load('assets/sphere/mem1.jpg');
+.load('assets/images/mem1.jpg');
 
 const geometry=new THREE.SphereGeometry(3,64,64);
 

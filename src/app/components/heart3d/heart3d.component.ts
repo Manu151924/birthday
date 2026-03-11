@@ -27,7 +27,7 @@ export class Heart3dComponent implements OnInit {
 
     renderer.setSize(window.innerWidth, 400);
 
-    const texture = new THREE.TextureLoader().load('assets/images/couple.png');
+    const texture = new THREE.TextureLoader().load('assets/images/couple.jpg');
 
     const geometry = new THREE.SphereGeometry(1, 32, 32);
 

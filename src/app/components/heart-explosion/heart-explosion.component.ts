@@ -1,9 +1,9 @@
-import { Component, OnInit, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, AfterViewInit } from '@angular/core';
 import * as THREE from 'three';
 
 @Component({
   selector: 'app-heart-explosion',
-  templateUrl: './heart-explosion.component.html',
+  template: `<canvas id="explosionCanvas"></canvas>`,
   styleUrls: ['./heart-explosion.component.scss'],
 })
 export class HeartExplosionComponent implements AfterViewInit {
@@ -16,41 +16,43 @@ export class HeartExplosionComponent implements AfterViewInit {
 
     const camera = new THREE.PerspectiveCamera(
       75,
-      window.innerWidth / window.innerHeight,
+      window.innerWidth / 400,
       0.1,
-      1000,
+      1000
     );
 
-    const renderer = new THREE.WebGLRenderer({ canvas });
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
 
     renderer.setSize(window.innerWidth, 400);
 
     camera.position.z = 5;
 
+    const textureLoader = new THREE.TextureLoader();
+    const heartTexture = textureLoader.load('assets/images/heart.jpg');
+
     const particles: any[] = [];
 
     function createHeart(x: number, y: number) {
-      const geometry = new THREE.SphereGeometry(0.1, 16, 16);
-
-      const material = new THREE.MeshBasicMaterial({
-        color: 0xff3366,
+      const material = new THREE.SpriteMaterial({
+        map: heartTexture,
+        transparent: true,
       });
 
-      const heart = new THREE.Mesh(geometry, material);
+      const sprite = new THREE.Sprite(material);
 
-      heart.position.set(x, y, 0);
+      sprite.position.set(x, y, 0);
+      sprite.scale.set(0.5, 0.5, 0.5);
 
-      scene.add(heart);
-
-      particles.push(heart);
+      scene.add(sprite);
+      particles.push(sprite);
     }
 
     canvas.addEventListener('click', (event: any) => {
       const x = (event.clientX / window.innerWidth) * 2 - 1;
-      const y = -(event.clientY / window.innerHeight) * 2 + 1;
+      const y = -(event.clientY / 400) * 2 + 1;
 
-      for (let i = 0; i < 100; i++) {
-        createHeart(x * 5, y * 5);
+      for (let i = 0; i < 80; i++) {
+        createHeart(x * 4, y * 2);
       }
     });
 
@@ -58,9 +60,9 @@ export class HeartExplosionComponent implements AfterViewInit {
       requestAnimationFrame(animate);
 
       particles.forEach((p) => {
-        p.position.x += Math.random() - 0.5;
-        p.position.y += Math.random() - 0.5;
-        p.position.z += Math.random() - 0.5;
+        p.position.x += (Math.random() - 0.5) * 0.1;
+        p.position.y += (Math.random() - 0.5) * 0.1;
+        p.position.z += (Math.random() - 0.5) * 0.1;
       });
 
       renderer.render(scene, camera);

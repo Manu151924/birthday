@@ -14,10 +14,10 @@ export class MemoriesComponent  implements OnInit {
   ngOnInit() {}
 
    images = signal([
-    'assets/images/meet.png',
-    'assets/images/date.png',
-    'assets/images/trip.png',
-    'assets/images/today.png'
+    'assets/images/meet.jpg',
+    'assets/images/date.jpg',
+    'assets/images/trip.jpg',
+    'assets/images/today.jpg'
   ]);
 
 }
